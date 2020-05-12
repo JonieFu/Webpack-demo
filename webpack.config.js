@@ -3,8 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const base = require("./webpack.config.base.js");
 const path = require("path");
 module.exports = {
-  ...base,
-  mode: "production",
+  mode: "development",
   plugins: [
     ...base.plugins,
     new MiniCssExtractPlugin({
@@ -18,16 +17,7 @@ module.exports = {
       ...base.module.rules,
       {
         test: /\.css$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: "../",
-              hmr: process.env.NODE_ENV === "development",
-            },
-          },
-          "css-loader",
-        ],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
